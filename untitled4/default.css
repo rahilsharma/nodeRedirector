@@ -116,7 +116,7 @@ video {
         font-size:14px
     }
     .headingFooter{
-        bottom:0;line-height: 1.5em;height:1.5em;padding-top:8px
+        bottom:0;line-height: 1.5em;height:1.5em;padding-top:8px;margin-left:-79px;
     }
     .headingFooterPara {
         font-size:12px;
@@ -1424,10 +1424,55 @@ body#stockboard>#feature {
         width:426px !important;
     }
 }
-@media (min-width: 500px) and (max-width: 600px){
+@media (min-width: 500px) and (max-width: 559px){
     .rightOfPhoto{
         width:465px !important;
     }
+    .headingFoote{
+        margin-left:-79px;
+    }
+}
+@media (min-width: 559px) and (max-width: 575px){
+    .rightOfPhoto{
+        width:462px !important;
+    }
+    .rightOfPhoto{
+        padding-left:0px !important;
+    }
+    .headingFoote{
+        margin-left:-79px;
+    }
+
+}
+@media (min-width: 575px) and (max-width: 585px){
+    .rightOfPhoto{
+        width:472px !important;
+    }
+    .rightOfPhoto{
+        padding-left:0px !important;
+    }
+    .headingFoote{
+        margin-left:-79px;
+    }
+
+}
+@media (min-width: 710px) and (max-width:1800px ){
+    .headingFooter{
+        margin-left:0px !important;
+    }
+}
+
+@media (min-width: 585px) and (max-width: 600px){
+    .rightOfPhoto{
+        width:481px !important;
+    }
+    .rightOfPhoto{
+        padding-left:0px !important;
+    }
+    .headingFoote{
+        margin-left:-79px;
+    }
+
 }
 @media (min-width: 600px) and (max-width: 1600px){
     .photosBig > img {

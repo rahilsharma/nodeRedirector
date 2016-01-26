@@ -209,12 +209,21 @@ var IdeaFeed = React.createClass({
 
     getInitialState : function() {
      //   var socket = io();
+        var curUser = Parse.User.current();
+        var id = '';
+        if (curUser){
+            id=curUser.id;
+        }
+        else {
+            id = "6Ip5HKmniJ";
+        }
         return {
             resultState : this.props.results,
             uniqueKeys : this.props.uniqueKeys, //will help in uniquely identifying the objects
             parameterToStopOngoingHits: 1, //for 0 stop making it enter the loop
             parameterForScrollDownLock : 0, //for 0 if we get empty array
-            count : 0
+            count : 0,
+            id : id
         };
     },
     render: function(){
@@ -225,6 +234,7 @@ var IdeaFeed = React.createClass({
             var ideaObjectId = res[i].id;
             tempCommentBoxArray.push(<IdeaBox passedObj={res[i]} key={ideaObjectId} />);
         }
+
         return (
             <div className="primary">
                 <ul className="item-post-create">
@@ -307,6 +317,8 @@ var IdeaFeed = React.createClass({
         window.removeEventListener('scroll', this.handleScroll);
     },
     handleScroll: function(event) {
+        var id = this.state.id;
+        id = "6Ip5HKmniJ";
         var tempCounter = this.state.parameterToStopOngoingHits;
         var resultState=this.state.resultState;
         var that = this;
@@ -320,7 +332,7 @@ var IdeaFeed = React.createClass({
             this.setState({
              parameterToStopOngoingHits:tempCounter
             });
-            Parse.Cloud.run("getFinancialFeed",{ currentUser:"6Ip5HKmniJ",  pageSize:13 , updatedAt:updatedAt }).then(function(resultt){
+            Parse.Cloud.run("getFinancialFeed",{ currentUser:id,  pageSize:13 , updatedAt:updatedAt }).then(function(resultt){
                 tempCounter=1;
                 var len = resultt.length;
                 for(var i=0;i<len;i++){
@@ -352,7 +364,7 @@ var IdeaFeed = React.createClass({
             this.setState({
                 parameterToStopOngoingHits:tempCounter
             });
-            Parse.Cloud.run("getFinancialFeed",{ currentUser:"6Ip5HKmniJ",  pageSize:13 , updatedAt:updatedAt , flag:true }).then(function(resultt){
+            Parse.Cloud.run("getFinancialFeed",{ currentUser:id,  pageSize:13 , updatedAt:updatedAt , flag:true }).then(function(resultt){
                 tempCounter=1;
                 var len = resultt.length;
                 console.log(JSON.stringify(resultt));
@@ -722,7 +734,7 @@ var IdeaBox = React.createClass({
                  </div>
                  <div className={bigArticlePhotoClass} style={{paddingTop: '5px',height: '365px',background: 'white'}}>
                      <div className="photosBig" style={{overflow:'hidden',position:'relative',height:'205px'}} >
-                         <img src={bigArticleObject.image} className="img-responsive" style={{maxHeight:'100%',maxWidth:'100%'}}/>                     </div>
+                         <img src={bigArticleObject.image} className="img-responsive" style={{maxHeight:'100%',maxWidth:'100%',width:'100%'}}/>                     </div>
                      <div className="headingBigArticle" style={{maxHeight:'47px',height:'auto',overflow:'hidden',paddingTop: '5px',paddingLeft: '9px',paddingRight: '9px'}}>
                          <p style={{fontSize:'17px',fontWeight:900}}>{bigArticleObject.title}</p>
                  </div>
@@ -1182,8 +1194,17 @@ var HeaderGuest =  React.createClass({
 console.log("1)Check if user is logged in or not .... 2)If he is logged in then show personalize ideas .....otherwise show ALL IDEAS");
 console.log("calling parse cloud code");
 
-
-Parse.Cloud.run("getFinancialFeed",{ currentUser:"6Ip5HKmniJ",  pageSize:20 }).then(function(result){
+var curUser = Parse.User.current();
+var id ="";
+if (curUser)
+{
+  // id = curUser.id;
+    id = "6Ip5HKmniJ";
+}
+else{
+    id = "6Ip5HKmniJ";
+}
+Parse.Cloud.run("getFinancialFeed",{ currentUser:id,  pageSize:20 }).then(function(result){
     console.log(JSON.stringify(result));
     var len = result.length;
     var resId=[];
