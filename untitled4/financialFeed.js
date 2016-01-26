@@ -2,6 +2,7 @@
  * Created by Rahil on 11-01-2016.
  */
 "use strict";
+
 function msToTime(s) {
     var days, hours, minutes, seconds, x;
     x = s / 1000;
@@ -265,7 +266,7 @@ var IdeaFeed = React.createClass({
     componentDidMount: function() {
         window.addEventListener('scroll', this.handleScroll);
         console.log("making ajax request!!!0");
-        startAjaxPolling();
+    //    startAjaxPolling();
         //socket code
         /* var count  = this.state.count;
         var currentUser = Parse.User.current();
@@ -1227,7 +1228,10 @@ $( "#fbClick" ).click(function() {
     console.log("fbclick");
     fbLogin();
 });
-
+$( "#googleClick" ).click(function() {
+    console.log("googlePlus");
+    googleLogin();
+});
 
 function fbLogin(){
     var returnValue = 0;
@@ -1283,3 +1287,29 @@ function fbLogin(){
     }(document, 'script', 'facebook-jssdk'));
 
 }
+//this loads google code
+(function (){
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/client.js?onload=onLoadCallback';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+
+
+function googleLogin()
+{
+    var myParams = {
+        'clientid' : '91168509869-1l2i48b1tn04pbi4os8qg46ffoug1t21.apps.googleusercontent.com', //You need to set client id
+        'cookiepolicy' : 'single_host_origin',
+        'callback' : 'googleLoginCallback', //callback function
+        'approvalprompt':'force',
+        'scope' : 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.profile.emails.read'
+    };
+    gapi.auth.signIn(myParams);
+}
+
+function googleLogout()
+{
+    gapi.auth.signOut();
+    location.reload();
+}
+

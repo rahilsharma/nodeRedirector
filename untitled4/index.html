@@ -147,14 +147,11 @@
 
                  </div>
 <div class="row">
-    <button type="button" class="btn btn-danger btn-lg btn-block" style="text-transform: uppercase;font-family: 'avenir-book'" >Sign in with Google</button>
+    <button type="button" class="btn btn-danger btn-lg btn-block" style="text-transform: uppercase;font-family: 'avenir-book'" id="googleClick" >Sign in with Google</button>
 </div>
 
 
-<div class="row">
-    <button type="button" class="btn btn-info btn-lg btn-block" style="text-transform: uppercase;font-family: 'avenir-book'" >Sign in with Twitter</button>
 
-</div>
 
 
                     <div class="row center">or use your email...</div>
@@ -225,13 +222,110 @@
 </body>
         <script type="text/babel" src="/financialFeed.js"></script>
 <script>
-  //  Parse.initialize("CD1ZbM6kWsQ1Gjgm0Vj6xOHiQY4hOmmVFKa32sLT", "tKikVpcbdORbZnzaGYWSIIfGU9LYBLjBLYbVEdEw");
+ //  Parse.initialize("CD1ZbM6kWsQ1Gjgm0Vj6xOHiQY4hOmmVFKa32sLT", "tKikVpcbdORbZnzaGYWSIIfGU9LYBLjBLYbVEdEw");
     Parse.initialize("RzSEwmJWHoy9Q92jcnR7WJgnXwLVExHtOjASXn0Z", "ZQ5GUDX9FQzl0YUJbeCs2U6fznhQmyGC599ewaT3");
 
+  function onLoadCallback(){
+      console.log("onLoadCallback was called!!!!!");
+      gapi.client.setApiKey('AIzaSyA6hMJ5vZMniiBYDT7uUpY39ZewSbrRB0Q'); //set your API KEY
+      gapi.client.load('plus', 'v1',function(){});//Load Google + API
+  }
+   function googleLoginCallback(result)
+   {
+       console.log(result);
+       if(result['status']['signed_in'])
+       {
+           console.log("Login Success");
+           //now close the login popup !!!!!!
+           //check if the email id already exists in the parse db
+           //insert if not present
+           //if already present just login the user!!!!!!!
+           //if there is no display name
+           $('#modal-signup').modal('hide');
+           var request = gapi.client.plus.people.get(
+                   {
+                       'userId': 'me'
+                   });
+           request.execute(function (resp)
+           {
+               console.log(resp);
+               var email = '';
+               var displayName = '';
+               var profilePic = '';
+               var userName = '';
+               if(resp['emails'])
+               {
+                   for(i = 0; i < resp['emails'].length; i++)
+                   {
+                       if(resp['emails'][i]['type'] == 'account')
+                       {
+                           email = resp['emails'][i]['value'];
+                       }
+                   }
+               }
+               if (resp.displayName){
+                   displayName = resp.displayName;
+               }
+               else{
+                   //use our email as username before @
+                   displayName = email.split("@")[0];
+               }
+               if (resp['image']){
+                   profilePic =  resp['image'].url;
+               }
+               username=email;
+               console.log("querying for usr!!!!!");
+               var queryUser = new Parse.Query("_User");
+               queryUser.equalTo("email",email);
+               queryUser.find().then(function (success){
+                   if (success.length>0){
+                       console.log("user exists!!!! just log the user in");
+                       Parse.User.logIn(email,email).then(function (s){
+                           console.log("lobin was successfull!!!!!!!!!");
+                           var curUser = Parse.User.current();
+                           if (curUser){
+                               console.log(curUser);
+                           }
+                           mountUnmountHeader();
+
+
+                       })
+                   }
+                   else {
+                       //signup the user!!!!
+                       var user = new Parse.User();
+                       user.set("displayName",displayName);
+                       user.set("username",username);
+                       user.set("password",email);
+                       user.set("email",email);
+                       user.set("profilePic",profilePic);
+                       user.signUp(null, {
+                           success: function(user) {
+                               // Hooray! Let them use the app now.
+                               var curUser = Parse.User.current();
+                               if (curUser){
+                                   console.log(curUser);
+                               }
+                               $('#modal-signup').modal('hide');
+                           },
+                           error: function(user, error) {
+                               // Show the error message somewhere and let the user try again.
+                               alert("Error: " + error.code + " " + error.message);
+                           }
+                       });
+                   }
+               });
+
+               console.log("email" + email + displayName + profilePic);
+           });
+       }
+
+   }
+
 </script>
+
+
 
 </html>
 
 
-/*<img src={bigArticleObject.image} className="img-responsive" style={{maxHeight:'100%',maxWidth:'100%',position:'absolute',left:'-100%',right:'-100%',top:'-100%',bottom:'-100%',margin:'auto'}}/>*/
-<img src={bigArticleObject.image} className="img-responsive" style={{maxHeight:'100%',maxWidth:'100%',width:'607px'}}/>

@@ -103,6 +103,7 @@ video {
 }
 
 @media (min-width:560px ){
+
     .headingArticle{
         max-height:49px;height:auto;overflow: hidden;font-weight: 700
     }
@@ -131,10 +132,10 @@ video {
         height:100%
     }
     .rightOfPhoto{
-        height: auto;width: 442px;display: inline;float:right
+        height: auto;width: 430px;display: inline;float:right
     }
     .articleSidePhoto{
-        height: 170px;padding :9px;background:white
+        height: 170px;padding :9px;width:610px;background:white
     }
 }
 
@@ -190,7 +191,7 @@ video {
     padding-top:14px !important;
 }
 .customButton{
-margin-top:-8px;
+    margin-top:-8px;
     margin-bottom: -8px !important;
     font-family: 'avenir-medium', "Helvetica Neue", Helvetica, Arial, sans-serif;
     float: right;
@@ -1309,34 +1310,11 @@ body#stockboard>#feature {
         line-height: 24px
     }
 }
-@media (min-width: 320px) and (max-width: 350px){
-    .rightOfPhoto{
-        width:294px !important;
-    }
-}
-@media (min-width: 351px) and (max-width: 410px){
-    .rightOfPhoto{
-        width:311px !important;
-    }
-}
-@media (min-width: 410px) and (max-width: 450px){
-    .rightOfPhoto{
-        width:373px !important;
-    }
-}
-@media (min-width: 450px) and (max-width: 500px){
-    .rightOfPhoto{
-        width:426px !important;
-    }
-}
-@media (min-width: 500px) and (max-width: 600px){
-    .rightOfPhoto{
-        width:470px !important;
-    }
-}
+
+
 @media  (max-width: 600px){
     .items{
-      margin:  0 0 0 -15px !important;
+        margin:  0 0 0 -15px !important;
     }
     li.item .item-body{
         padding-bottom:0px !important;
@@ -1352,7 +1330,7 @@ body#stockboard>#feature {
         height:85px !important;
     }
     .rightOfPhoto{
-        width:428px ;
+        width:294px ;
         display:block !important;
         height: auto;display: inline;
     }
@@ -1364,7 +1342,7 @@ body#stockboard>#feature {
     .headingBase {
         padding-left:6px;
         height:39px !important;
-       overflow: hidden;padding-top:2px
+        overflow: hidden;padding-top:2px
     }
     .headingBase > :first-child{
         margin-top:-3px;font-size:10.6px;line-height: 13px;
@@ -1373,11 +1351,11 @@ body#stockboard>#feature {
         display: none;
     }
     .headingFooter{
-        padding-left:2px !important;  bottom:0;
+        padding-left:91px !important;  bottom:0;
     }
     .headingFooter > :first-child{
         font-size:10px !important; white-space:nowrap;
-        text-overflow: ellipsis;padding-left:84px !important;
+        text-overflow: ellipsis;
     }
     .articleSidePhoto{
         height: 91px;padding :3px;background:white
@@ -1406,11 +1384,49 @@ body#stockboard>#feature {
     ul.pages.hor.centered{
         display: none !important;
     }
-    li.item-post .item-stats .stat-group{
-        width:100% !important;
+
+
+}
+@media (min-width: 330px){
+    .rightOfPhoto{
+        width:305px;
     }
 }
-
+@media (min-width: 340px){
+    .rightOfPhoto{
+        width:314px;
+    }
+}
+@media (min-width: 350px){
+    .rightOfPhoto{
+        width:330px;
+    }
+}
+@media (min-width: 370px){
+    .rightOfPhoto{
+        width:353px;
+    }
+}
+@media (min-width: 400px){
+    .rightOfPhoto{
+        width:413px;
+    }
+}
+@media (min-width: 450px){
+    .rightOfPhoto{
+        width:428px;
+    }
+}
+@media (min-width: 500px){
+    .rightOfPhoto{
+        width:474px;
+    }
+}
+@media (min-width: 550px){
+    .rightOfPhoto{
+        width:524px;
+    }
+}
 @media (min-width:660px) {
     #feature h1 {
         font-size: 46px;
@@ -2872,7 +2888,7 @@ ul.menu li span.subtitle.right {
 .items {
     clear: both;
     float: left;
-    margin: 0 -5px 0 -15px !important;
+    margin: 0 0 0 -10px
 }
 
 .items.width-fluid {
@@ -3956,7 +3972,7 @@ li.item-post .item-footer ul.actions li.active i {
 }
 
 ul.item-post-create {
-    margin: 0 -5px 10px -15px
+    margin: 0 0 10px -10px
 }
 
 ul.item-post-create li.item {
