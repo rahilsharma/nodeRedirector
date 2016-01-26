@@ -721,8 +721,8 @@ var IdeaBox = React.createClass({
                      </div>
                  </div>
                  <div className={bigArticlePhotoClass} style={{paddingTop: '5px',height: '365px',background: 'white'}}>
-                     <div className="photosBig" style={{overflow:'hidden',position:'relative',height:'205px',width:'100%'}} >
-                         <img src={bigArticleObject.image} className="img-responsive" style={{maxHeight:'100%',maxWidth:'100%',width:'607px'}}/>                     </div>
+                     <div className="photosBig" style={{overflow:'hidden',position:'relative',height:'205px'}} >
+                         <img src={bigArticleObject.image} className="img-responsive" style={{maxHeight:'100%',maxWidth:'100%'}}/>                     </div>
                      <div className="headingBigArticle" style={{maxHeight:'47px',height:'auto',overflow:'hidden',paddingTop: '5px',paddingLeft: '9px',paddingRight: '9px'}}>
                          <p style={{fontSize:'17px',fontWeight:900}}>{bigArticleObject.title}</p>
                  </div>
